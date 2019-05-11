@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>invent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/images/favicon.ico"/>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/custom-fonts.css"/>
+  <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/fontawesome-5.8.1/css/all.css"/>
+  <link rel="stylesheet" href="/css/jquery.dataTables.min.css"> 
+  <script type="text/javascript" src="/js/jquery-3.4.0.min.js" ></script>
+  <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script> 
+  <script type="text/javascript"  src="/js/bootstrap-table.min.js"></script> 
+ <script type="text/javascript"  src="/js/datatable.js"></script> 
+  <script type="text/javascript"  src="/js/vue.js"></script>
+  <script type="text/javascript"  src="/js/axios.min.js"></script>
+  <script type="text/javascript"  src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript"  src="/js/invent-scripts.js"></script>
+  <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+<div id="app">
+			 <div id="navbar-wrapper">
+			        <header>
+			            <nav class="navbar navbar-default navbar-fixed-top " id="nav-bg" role="navigation">
+			                <div class="container-fluid">
+			                    <div class="navbar-header">
+			                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+			                            <span class="sr-only">Toggle navigation</span>
+			                            <span class="icon-bar"></span>
+			                            <span class="icon-bar"></span>
+			                            <span class="icon-bar"></span>
+			                        </button>
+			                        <a class="navbar-brand" id="logo" href="/home">Invent</a>
+			                    </div>
+			                    <div id="navbar-collapse" class="collapse navbar-collapse">
+			                        <ul class="nav navbar-nav navbar-right">
+			               
+			                            <li class="dropdown">
+			                                <a id="user-profile" href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/images/user.png" class="img-responsive img-thumbnail img-circle"> Username</a>
+			                                <ul class="dropdown-menu dropdown-block" role="menu">
+			                                    <li><a href="#">Profile</a></li>
+			                                    <li><a href="#">Logout</a></li>
+			                                </ul>
+			                            </li>
+			                        </ul>
+			                    </div>
+			                </div>
+			            </nav>
+			        </header>
+			    </div>
+			    <div id="wrapper">
+			        <div id="sidebar-wrapper">
+			            <aside id="sidebar">
+			                <ul id="sidemenu" class="sidebar-nav">
+				                <li id="sidebar-section-title">
+				                        <a>
+				                            <span class="sidebar-title">Main Navigation</span>
+				                        </a>
+				                </li>
+			                    <li id="menu-item">
+			                        <a href="/home">
+			                            <span class="sidebar-icon"><i class="fas fa-tachometer-alt"></i></span>
+			                            <span class="sidebar-title">DashBoard</span>
+			                        </a>
+			                    </li>
+			                    <li id="menu-item">
+			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-1">
+			                            <span class="sidebar-icon"><i class="fa fa-users"></i></span>
+			                            <span class="sidebar-title">Users</span>
+			                            <b class="caret"></b>
+			                        </a>
+			                        <ul id="submenu-1" class="panel-collapse collapse panel-switch" role="menu">
+			                            <li id="menu-sub-items"><a href="/add-user"><i class="fa fa-caret-right"></i>Add User</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-users"><i class="fa fa-caret-right"></i>Manage Users</a></li>
+			                        </ul>
+			                    </li>
+			                    <li id="menu-item">
+			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-2">
+			                            <span class="sidebar-icon"><i class="fas fa-tools"></i></span>
+			                            <span class="sidebar-title">General Settings</span>
+			                            <b class="caret"></b>
+			                        </a>
+			                        <ul id="submenu-2" class="panel-collapse collapse panel-switch" role="menu">
+			                            <li id="menu-sub-items"><a href="/company"><i class="fa fa-caret-right"></i>Company Info</a></li>
+			                        </ul>
+			                    </li>
+			                    <li id="menu-item">
+			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-3">
+			                            <span class="sidebar-icon"><i class="fab fa-product-hunt"></i></span>
+			                            <span class="sidebar-title">Products</span>
+			                            <b class="caret"></b>
+			                        </a>
+			                        <ul id="submenu-3" class="panel-collapse collapse panel-switch" role="menu">
+			                            <li id="menu-sub-items"><a href="/add-product"><i class="fa fa-caret-right"></i>Add Product</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-products"><i class="fa fa-caret-right"></i>Manage Products</a></li>
+			                        </ul>
+			                    </li>
+			                     <li id="menu-item">
+			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-4">
+			                            <span class="sidebar-icon"><i class="fas fa-coins"></i></span>
+			                            <span class="sidebar-title">Sales</span>
+			                            <b class="caret"></b>
+			                        </a>
+			                        <ul id="submenu-4" class="panel-collapse collapse panel-switch" role="menu">
+			                            <li id="menu-sub-items"><a href="/sales"><i class="fa fa-caret-right"></i>New Sale</a></li>
+			                        </ul>
+			                    </li>
+			                     <li id="menu-item">
+			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-5">
+			                            <span class="sidebar-icon"><i class="fas fa-file-invoice-dollar"></i></span>
+			                            <span class="sidebar-title">Invoices</span>
+			                            <b class="caret"></b>
+			                        </a>
+			                        <ul id="submenu-5" class="panel-collapse collapse panel-switch" role="menu">
+			                            <li id="menu-sub-items"><a href="/create-invoice"><i class="fa fa-caret-right"></i>Generate Invoice</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-invoices"><i class="fa fa-caret-right"></i>Invoice Management</a></li>
+			                        </ul>
+			                    </li>
+			                    <li id="menu-item">
+			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-6">
+			                            <span class="sidebar-icon"><i class="fas fa-people-carry"></i></span>
+			                            <span class="sidebar-title">Vendors</span>
+			                            <b class="caret"></b>
+			                        </a>
+			                        <ul id="submenu-6" class="panel-collapse collapse panel-switch" role="menu">
+			                            <li id="menu-sub-items"><a href="/add-vendor"><i class="fa fa-caret-right"></i>Add Vendor</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-vendors"><i class="fa fa-caret-right"></i>Manage Vendors</a></li>
+			                        </ul>
+			                    </li>
+			                    <li id="menu-item">
+			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-7">
+			                            <span class="sidebar-icon"><i class="fas fa-cubes"></i></span>
+			                            <span class="sidebar-title">Stock</span>
+			                            <b class="caret"></b>
+			                        </a>
+			                        <ul id="submenu-7" class="panel-collapse collapse panel-switch" role="menu">
+			                            <li id="menu-sub-items"><a href="/add-stock"><i class="fa fa-caret-right"></i>Add New Item</a></li>
+			                            <li id="menu-sub-items"><a href="/update-stock"><i class="fa fa-caret-right"></i>Update Stock</a></li>
+			                        </ul>
+			                    </li>
+			                    <li id="menu-item">
+			                        <a href="/reports">
+			                            <span class="sidebar-icon"><i class="far fa-chart-bar"></i></span>
+			                            <span class="sidebar-title">Reports</span>
+			                        </a>
+			                    </li>
+			                </ul>
+			            </aside>            
+			        </div>
+			        <div id="content-wrapper">
+							<div class="breadcrumb-section">
+								<a href="/home" class="inactive" >Home</a>
+								<a href="/reports" class="active">Reports</a>
+							</div>
+			        </div>
+			        <div id="footer">
+			        <p>Copyright &copy;2019&nbsp;|&nbsp;All Rights Reserved</p>
+			        </div>
+			    </div> 
+    </div>
+  
+</body>
+</html>

@@ -1,0 +1,41 @@
+/* Lobster regular */
+
+@font-face {
+    font-family: "Lobster";
+    src: url("../fonts/	Lobster-Regular.eot");
+    src: url("../fonts/Lobster-Regular.eot?#iefix") format('embedded-opentype'),
+         url("../fonts/Lobster-Regular.woff2") format('woff2'),
+         url("../fonts/Lobster-Regular.woff") format('woff'),
+         url("../fonts/Roboto-Regular.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "LobsterTwo";
+    src: url("../fonts/	LobsterTwo-Regular.eot");
+    src: url("../fonts/LobsterTwo-Regular.eot?#iefix") format('embedded-opentype'),
+         url("../fonts/LobsterTwo-Regular.woff2") format('woff2'),
+         url("../fonts/LobsterTwo-Regular.woff") format('woff'),
+         url("../fonts/RobotoTwo-Regular.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Righteous";
+    src: url("../fonts/	Righteous-Regular.eot");
+    src: url("../fonts/Righteous-Regular.eot?#iefix") format('embedded-opentype'),
+         url("../fonts/Righteous-Regular.woff2") format('woff2'),
+         url("../fonts/Righteous-Regular.woff") format('woff'),
+         url("../fonts/Righteous-Regular.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+#logo{
+	font-family: 'Lobster', cursive;
+}
+#footer p{
+	font-family: 'LobsterTwo', cursive;
+}
+#sidebar-wrapper .sidebar-nav #sidebar-section-title a {
+   font-family: 'Righteous', cursive;
+}
