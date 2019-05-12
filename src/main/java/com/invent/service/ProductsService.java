@@ -11,6 +11,7 @@ public interface ProductsService {
 	public Optional<ProductsModel> getProductRecordById(Long id);
 	public void deleteProductRecordById(Long id);
 	public void saveProductRecord(ProductsModel products);
+	public void updateProductRecord(ProductsModel products);
 	public int updateProductQuantity(Long id,int quantity);
 
 

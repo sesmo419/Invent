@@ -47,7 +47,13 @@ public class ProductsController {
 		
 		productsService.saveProductRecord(products);;
 	}
-
+	
+	@PutMapping("/{id}")
+	public void updateProductRecord(ProductsModel products) {
+			
+		productsService.updateProductRecord(products);;	
+		}
+	
 	@PutMapping("/{id}/quantity")
 	public void updateProductQuantity(@PathVariable Long id,@Param("quantity")int quantity) {
 		

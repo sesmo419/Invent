@@ -45,4 +45,10 @@ public class ProductsServiceImpl implements ProductsService {
 		return productsDao.increaseProductQuantity(id, quantity);
 	}
 
+	@Override
+	public void updateProductRecord(ProductsModel products) {
+		
+		productsDao.save(products);	
+	}
+
 }
