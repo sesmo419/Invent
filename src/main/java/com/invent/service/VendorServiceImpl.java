@@ -1,6 +1,7 @@
 package com.invent.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,9 +46,15 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	@Override
-	public void updateVendorRecord(VendorModel vendor) {
+	public void updateVendorRecord(VendorModel vendor,Long id) {
 		
 		vendorDao.save(vendor);
+	}
+
+	@Override
+	public Optional<VendorModel> getVendorRecordById(Long id) {
+		
+		return vendorDao.findById(id);
 	}
 
 }

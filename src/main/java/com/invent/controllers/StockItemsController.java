@@ -1,5 +1,6 @@
 package com.invent.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,16 +62,17 @@ public class StockItemsController {
 		
 	}
 
-	@PutMapping("/{id}/stock-in")
-	public int increaseStockItemQuantity(@PathVariable Long id, @Param("quantity") int quantity) {
+	@PutMapping("/{id}/stockIn")
+	public int increaseStockItemQuantity(@PathVariable Long id, @Param("quantity") int quantity,@Param("dateReceived") Date dateReceived) {
 			
-			return stockItemsDao.increaseStockItemQuantity(id, quantity);
+			return stockItemsDao.increaseStockItemQuantity(id, dateReceived,quantity);
 	}
 	@PutMapping("/{id}/stock-out")
 	public int decreaseStockItemQuantity(@PathVariable Long id, @Param("quantity") int quantity) {
 			
 			return stockItemsDao.decreaseStockItemQuantity(id, quantity);
-		}
+		}	
+	
 	@DeleteMapping("/{id}")
 	public void deleteStockItemById(@PathVariable Long id) {
 		

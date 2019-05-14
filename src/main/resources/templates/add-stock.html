@@ -20,6 +20,85 @@
   <script type="text/javascript"  src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript"  src="/js/invent-scripts.js"></script>
   <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script>
+  <style>
+.wrapper {	
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.form {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+}
+.breadcrumb-wrapper{
+	width:100%;
+	height:60px;
+	background: #6ca1f7;
+}
+.stock-wrapper{
+	width:100%;
+	height:410px;
+	margin-top:15px;
+}
+.add-stock-section{
+	background:#0f4668;
+	height:480px;
+	width:50%;
+	float:left;
+	border-left:10px solid #6ca1f7;
+	text-align:center;
+	border-radius: 0 20px 0 0;
+}
+#addStockItem-form{
+	margin-top:5px;
+	width:80%;
+	height:440px;;
+	display:inline-block;
+	background:#6893e8;
+	border-bottom:2px solid white;
+
+}
+#updateStockItem-form{
+	margin-top:5px;
+	width:80%;
+	height:440px;;
+	display:inline-block;
+	background:#999cdb;
+	border-bottom:2px solid white;
+
+}
+.addStockItemForm{
+	padding-top:45px;
+}
+.updateStockItemForm{
+	padding-top:45px;
+}
+.update-stock-section{
+	background:#1a577c;
+	height:480px;
+	width:50%;
+	display:inline-block;
+	border-left:5px solid #6ca1f7;
+	border-right:10px solid #6ca1f7;	
+	border-radius: 20px 0 0 0;	
+	text-align:center;
+}
+#stock-section{
+	display:inline-block;
+	background:white;
+	border-radius:0 0 10px 10px;
+	color:#02561e;
+	font-size:16px;
+	text-align:center;
+	padding:5px;
+	font-family:Times Roman;
+	font-weight:bold;
+}
+
+</style>
 </head>
 <body>
 			 <div id="navbar-wrapper">
@@ -69,12 +148,12 @@
 			                    <li id="menu-item">
 			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-1">
 			                            <span class="sidebar-icon"><i class="fa fa-users"></i></span>
-			                            <span class="sidebar-title">Users</span>
+			                            <span class="sidebar-title">People</span>
 			                            <b class="caret"></b>
 			                        </a>
 			                        <ul id="submenu-1" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-user"><i class="fa fa-caret-right"></i>Add User</a></li>
-			                            <li id="menu-sub-items"><a href="/manage-users"><i class="fa fa-caret-right"></i>Manage Users</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-users"><i class="fa fa-caret-right"></i>Users</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-vendors"><i class="fa fa-caret-right"></i>Vendors</a></li>
 			                        </ul>
 			                    </li>
 			                    <li id="menu-item">
@@ -94,7 +173,7 @@
 			                            <b class="caret"></b>
 			                        </a>
 			                        <ul id="submenu-3" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-product"><i class="fa fa-caret-right"></i>Add Product</a></li>
+			                            <li id="menu-sub-items"><a href="/add-product"><i class="fa fa-caret-right"></i>Add / Update Product</a></li>
 			                            <li id="menu-sub-items"><a href="/manage-products"><i class="fa fa-caret-right"></i>Manage Products</a></li>
 			                        </ul>
 			                    </li>
@@ -106,6 +185,7 @@
 			                        </a>
 			                        <ul id="submenu-4" class="panel-collapse collapse panel-switch" role="menu">
 			                            <li id="menu-sub-items"><a href="/sales"><i class="fa fa-caret-right"></i>New Sale</a></li>
+			                            
 			                        </ul>
 			                    </li>
 			                     <li id="menu-item">
@@ -120,26 +200,14 @@
 			                        </ul>
 			                    </li>
 			                    <li id="menu-item">
-			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-6">
-			                            <span class="sidebar-icon"><i class="fas fa-people-carry"></i></span>
-			                            <span class="sidebar-title">Vendors</span>
-			                            <b class="caret"></b>
-			                        </a>
-			                        <ul id="submenu-6" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-vendor"><i class="fa fa-caret-right"></i>Add Vendor</a></li>
-			                            <li id="menu-sub-items"><a href="/manage-vendors"><i class="fa fa-caret-right"></i>Manage Vendors</a></li>
-			                        </ul>
-			                    </li>
-			                    <li id="menu-item">
 			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-7">
 			                            <span class="sidebar-icon"><i class="fas fa-cubes"></i></span>
 			                            <span class="sidebar-title">Stock</span>
 			                            <b class="caret"></b>
 			                        </a>
 			                        <ul id="submenu-7" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-stock"><i class="fa fa-caret-right"></i>Add New Item</a></li>
-			                            <li id="menu-sub-items"><a href="/update-stock"><i class="fa fa-caret-right"></i>Update Stock</a></li>
-			                        </ul>
+			                            <li id="menu-sub-items"><a href="/add-stock"><i class="fa fa-caret-right"></i>Add / Update Stock</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-stock"><i class="fa fa-caret-right"></i>Manage Stock</a></li>			                        </ul>
 			                    </li>
 			                    <li id="menu-item">
 			                        <a href="/reports">
@@ -151,43 +219,327 @@
 			            </aside>            
 			        </div>
 			        <div id="content-wrapper">
+                         <div class="breadcrumb-wrapper">			        
 							<div class="breadcrumb-section">
 								<a href="/home" class="inactive" >Home</a>
 								<a href="/add-stock" class="active">Add Stock</a>
 							</div>
-						<button class="trigger">Save</button>
-							    <div class="modal">
-							        <div class="modal-content">
-							            <span class="close-button">&times;</span>
-							             <h4 class="modal-title">Product Added</h4>
-							          <div class="modal-body">
-							                  <p>Product Added Successfully</p>
-							                </div>   
-							        </div>	
-							    </div>
+						</div>
+							<div class="stock-wrapper">
+									<div class="add-stock-section"><div id="stock-section">Add New Stock Item</div>
+										<div id="addStockItem-form">
+												    <div  v-if="show">
+												        <div class="success-modal">
+												            <span class="success-close-button" v-on:click="closeModal">&times;</span>
+												             <p class="success-modal-title">Stock Item added Successfully &nbsp;<i class="fas fa-check-circle"></i></p>  
+												        </div>	
+												    </div>
+														<form class="addStockItemForm">
+														
+																	   <div class="form-group col-md-12" >
+																	           <label for="vendorName">Vendor</label>
+																						<select v-model="vendor" class="form-control">	
+																							<option :value="{}" disabled> --select vendor-- </option>
+																							<option v-for="vendor in vendors" v-bind:value="vendor">{{vendor.vendorName}}</option>
+																						</select>
+																	            <span class="text-danger" 
+																		               v-if="validationErrors.vendorName" 
+																		             v-text="validationErrors.vendorName">
+																		        </span>
+																	  </div>
+								
+																	   <div class="form-group col-md-12" >
+																	           <label for="stockItemName">Stock Item Name</label>
+																	           <input type="text" 
+																	                  class="form-control"
+																	                  name="stockItemName" 
+																	                  placeholder="" 
+																	                  value="" 
+																	                  id="stockItemName" 
+																	                  v-model="stockItemName" required>
+																	            <span class="text-danger" 
+																		               v-if="validationErrors.stockItemName" 
+																		             v-text="validationErrors.stockItemName">
+																		        </span>
+																	
+																	   </div>
+																	   <div class="form-group col-md-12">
+																	           <label>Quantity</label>
+																	           <input type="number" 
+																	                  class="form-control" 
+																	                  name="quantity"
+																	                  placeholder=""
+																	                  value="" 
+																	                  id="quantity" 
+																	                  v-model="quantity" required>
+																	            <span class="text-danger" 
+																	            	   v-if="validationErrors.quantity" 
+																	            	 v-text="validationErrors.quantity">
+																	            </span>
+																	   </div>
+																	   <div class="form-group col-md-12">
+																	           <label>Date Received</label>
+																	           <input type="date" 
+																	                  class="form-control" 
+																	                  name="dateReceived"
+																	                  placeholder=""
+																	                  value="" 
+																	                  id="dateReceived" 
+																	                  v-model="dateReceived" required>
+																	            <span class="text-danger" 
+																	            	   v-if="validationErrors.dateReceived"
+																	            	 v-text="validationErrors.dateReceived">
+																	            </span>
+																	   </div>
+															            <button type="button" 
+															                    class="btn" 
+															                     @click.prevent="resetForm">Reset
+															            </button>
+													                      <button class="btn btn-success" 
+													                      type="submit" 
+													                      @click.prevent="saveStockItem(vendor,id)">Save
+													                      </button>
+				
+								                    </form>
+															  
+											</div>
+
+									</div>
+									<div class="update-stock-section"><div id="stock-section">Update Stock Item</div>
+									 	<div id="updateStockItem-form">
+												    <div  v-if="show">
+												        <div class="success-modal">
+												            <span class="success-close-button" v-on:click="closeModal">&times;</span>
+												             <p class="success-modal-title">Stock Item updated Successfully &nbsp;<i class="fas fa-check-circle"></i></p>  
+												        </div>	
+												    </div>
+														<form class="updateStockItemForm">
+
+																	   <div class="form-group col-md-12" >
+																	           <label for="StockItemName">Stock Item</label>
+																						<select v-model="stockItem" class="form-control">	
+																							<option :value="{}" disabled> --select stock item-- </option>
+																							<option v-for="stockItem in stockItems" v-bind:value="stockItem">{{stockItem.stockItemName}}</option>
+																						</select>
+																	            <span class="text-danger" 
+																		               v-if="validationErrors.StockItemName" 
+																		             v-text="validationErrors.StockItemName">
+																		        </span>
+																	  </div>	
+																	   <div class="form-group col-md-12">
+																	           <label>StockIn(Qty)</label>
+																	           <input type="number" 
+																	                  class="form-control" 
+																	                  name="newQuantity"
+																	                  placeholder=""
+																	                  value="" 
+																	                  id="newQuantity" 
+																	                  v-model="newQuantity" required>
+																	            <span class="text-danger" 
+																	            	   v-if="validationErrors.newQuantity" 
+																	            	 v-text="validationErrors.newQuantity">
+																	            </span>
+																	   </div>
+																	   <div class="form-group col-md-12">
+																	           <label>Date</label>
+																	           <input type="text" 
+																	                  class="form-control" 
+																	                  name="stockInDate"
+																	                  placeholder="dd/mm/yyyy"
+																	                  size=10
+																	                  maxlength=10
+																	                  onkeyup="this.value=this.value.replace(/^(\d\d)(\d)$/g,'$1/$2').replace(/^(\d\d\/\d\d)(\d+)$/g,'$1/$2').replace(/[^\d\/]/g,'')"
+																	                  value="" 
+																	                  id="stockInDate" 
+																	                  v-model="stockInDate" required>
+																	            <span class="text-danger" 
+																	            	   v-if="validationErrors.stockInDate"
+																	            	 v-text="validationErrors.stockInDate">
+																	            </span>
+																	   </div>
+															            <button type="button" 
+															                    class="btn" 
+															                     @click.prevent="resetForm">Reset
+															            </button>
+													                      <button class="btn btn-info" 
+													                      type="submit" 
+													                      @click.prevent="updateStockItem(stockItem,newQuantity,stockInDate,id)">Update
+													                      </button>				
+														 </form>
+									              </div>
+									 
+							</div>
 			        </div>
+			    </div>
 			        <div id="footer">
 			        <p>Copyright &copy;2019&nbsp;|&nbsp;All Rights Reserved</p>
-			        </div>
-			    </div> 
+			  </div>
+   </div> 
 <script type="text/javascript">
-var modal = document.querySelector(".modal");
-var trigger = document.querySelector(".trigger");
-var closeButton = document.querySelector(".close-button");
+ var app1 = new Vue({
+	    el: '#addStockItem-form',
+	    data: function () {
+	        return {
+	        	stockItems:Array,
+	        	vendors:Array,
+	        	vendor:{},
+	        	id:'',
+	        	vendorName:'',
+                stockItemName: '',
+                quantity: '',
+                dateReceived: '',
+	            validationErrors: {
+	                vendorName: null,
+	                stockItemName: null,
+	                quantity: null,
+	    	        dateReceived:null
+	            },
+	            show:false
+	        }
 
-function toggleModal() {
-    modal.classList.toggle("modal");
-}
+	    },
+	    created: function () {
+		      this.fetchVendors();
+		    },
+	    methods: {
+	    	fetchVendors: function () {
+	    	      axios.get('/api/vendors/').then(function (response) {
+	    	        this.vendors = response.data
+	    	      }.bind(this)).catch(function (error) {
+	    	        console.log('Error while fetching product data: ' + error)
+	    	      })
+	    	    },
+	        saveStockItem:function(vendor,id) {
+	            if (this.validateForm()) {
+	                //submit form to backend
+		   	           axios.post(`/api/stock-items/${vendor.id}`,this.newStockItem).then(this.resetForm())
+			   	      //show success Modal
+			   	      this.show=true
+	            }
+	        },
+	        validateForm:function() {
+	            var formId = 'addStockItem-form';
+	            var nodes = document.querySelectorAll(`#${formId} :invalid`);
+	            var errorObjectName = 'validationErrors';
+	            var vm = this; //current vue instance;
 
-function windowOnClick(event) {
-    if (event.target === modal) {
-        toggleModal();
-    }
-}
+	            Object.keys(this[errorObjectName]).forEach(key => {
+	                this[errorObjectName][key] = null
+	            });
 
-trigger.addEventListener("click", toggleModal);
-closeButton.addEventListener("click", toggleModal);
-window.addEventListener("click", windowOnClick)
-</script>
+	            if (nodes.length > 0) {
+	                nodes.forEach(node => {
+	                    this[errorObjectName][node.name] = node.validationMessage;
+	                    node.addEventListener('change', function (e) {
+	                        vm.validateForm();
+	                    });
+	                });
+
+	                return false;
+	            }
+	            else {
+	                return true;
+	            }
+	        },
+	        closeModal:function(){
+	  			this.show=false
+	  		},
+	  		resetForm:function(){
+	    		this.stockItemName='',
+	    		this.quantity='',
+	    		this.dateReceived='',
+	    		this.show=false
+	    	}
+	    },
+	    computed:{
+	    	newStockItem:function(){
+	    		return {
+	    			stockItemName:this.stockItemName,
+	   	            quantity:this.quantity,
+	   	            dateReceived:this.dateReceived
+	    		}
+	    	}
+	    }
+		 
+	});
+ var app2 = new Vue({
+	    el: '#updateStockItem-form',
+	    data: function () {
+	        return {
+	         stockItems:Array,
+	         stockItem:{},	
+	         id:'',
+             stockItemName: '',
+             newQuantity: '', 
+             stockInDate:'',
+	            validationErrors: {
+	                stockItemName: null,
+	                newQuantity: null,
+	                stockInDate: null
+	    	        
+	            },
+	            show:false
+	        }
+
+	    },
+	    created: function () {
+		      this.fetchStockItems();
+		    },
+	    methods: {
+	    	fetchStockItems: function () {
+	    	      axios.get('/api/stock-items/').then(function (response) {
+	    	        this.stockItems = response.data
+	    	      }.bind(this)).catch(function (error) {
+	    	        console.log('Error while fetching stock items data: ' + error)
+	    	      })
+	    	    },
+	        updateStockItem:function(stockItem,newQuantity,stockInDate,id){
+	            if (this.validateForm()) {
+		   	          axios.put(`/api/stock-items/${stockItem.id}/stockIn?quantity=${newQuantity}&dateReceived=${stockInDate}`);
+			   	      //show success Modal
+			   	      this.show=true
+	            }
+	        },
+	        validateForm:function() {
+	            var formId = 'updateStockItem-form';
+	            var nodes = document.querySelectorAll(`#${formId} :invalid`);
+	            var errorObjectName = 'validationErrors';
+	            var vm = this; //current vue instance;
+
+	            Object.keys(this[errorObjectName]).forEach(key => {
+	                this[errorObjectName][key] = null
+	            });
+
+	            if (nodes.length > 0) {
+	                nodes.forEach(node => {
+	                    this[errorObjectName][node.name] = node.validationMessage;
+	                    node.addEventListener('change', function (e) {
+	                        vm.validateForm();
+	                    });
+	                });
+
+	                return false;
+	            }
+	            else {
+	                return true;
+	            }
+	        },
+	        closeModal:function(){
+	  			this.show=false
+	  		},
+	  		resetForm:function(){
+	    		this.stockItemName='',
+	    		this.newQuantity='',
+	    		this.stockInDate='',
+	    		this.show=false
+	    	}
+
+	    }
+		 
+	});
+
+
+  
+  </script>
 </body>
 </html>

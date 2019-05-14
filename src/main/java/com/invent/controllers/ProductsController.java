@@ -39,19 +39,19 @@ public class ProductsController {
 	@DeleteMapping("/{id}")
 	public void deleteProductRecordById(@PathVariable Long id) {
 		
-		productsService.deleteProductRecordById(id);;
+		productsService.deleteProductRecordById(id);
 	}
 
 	@PostMapping("/save")
 	public void saveProductRecord(@RequestBody ProductsModel products) {
 		
-		productsService.saveProductRecord(products);;
+		productsService.saveProductRecord(products);
 	}
 	
 	@PutMapping("/{id}")
-	public void updateProductRecord(ProductsModel products) {
+	public void updateProductRecord(@RequestBody ProductsModel products,@PathVariable Long id) {
 			
-		productsService.updateProductRecord(products);;	
+		productsService.updateProductRecord(products,id);
 		}
 	
 	@PutMapping("/{id}/quantity")

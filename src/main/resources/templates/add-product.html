@@ -20,10 +20,10 @@
   <script type="text/javascript"  src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript"  src="/js/invent-scripts.js"></script>
   <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script>
-</head>
-<style>
+  
+  <style>
 .wrapper {	
-	margin-top: 80px;
+  margin-top: 80px;
   margin-bottom: 80px;
 }
 
@@ -34,8 +34,74 @@
   background-color: #fff;
   border: 1px solid rgba(0,0,0,0.1);  
 }
+.breadcrumb-wrapper{
+	width:100%;
+	height:60px;
+	background: #6ca1f7;
+}
+.product-wrapper{
+	width:100%;
+	height:410px;
+	margin-top:15px;
+}
+.add-product-section{
+	background:#0f4668;
+	height:410px;
+	width:50%;
+	float:left;
+	border-left:10px solid #6ca1f7;
+	text-align:center;
+	border-radius: 0 20px 0 0;
+}
+#addProduct-form{
+	margin-top:5px;
+	width:80%;
+	height:365px;;
+	display:inline-block;
+	background:#6893e8;
+	border-bottom:2px solid white;
+
+}
+#updateProduct-form{
+	margin-top:5px;
+	width:80%;
+	height:365px;;
+	display:inline-block;
+	background:#999cdb;
+	border-bottom:2px solid white;
+
+}
+.addProductForm{
+	padding-top:45px;
+}
+.updateProductForm{
+	padding-top:45px;
+}
+.update-product-section{
+	background:#1a577c;
+	height:410px;
+	width:50%;
+	display:inline-block;
+	border-left:5px solid #6ca1f7;
+	border-right:10px solid #6ca1f7;	
+	border-radius: 20px 0 0 0;	
+	text-align:center;
+}
+#product-section{
+	display:inline-block;
+	background:white;
+	border-radius:0 0 10px 10px;
+	color:#02561e;
+	font-size:16px;
+	text-align:center;
+	padding:5px;
+	font-family:Times Roman;
+	font-weight:bold;
+}
 
 </style>
+</head>
+
 <body>
 			 <div id="navbar-wrapper">
 			        <header>
@@ -84,12 +150,12 @@
 			                    <li id="menu-item">
 			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-1">
 			                            <span class="sidebar-icon"><i class="fa fa-users"></i></span>
-			                            <span class="sidebar-title">Users</span>
+			                            <span class="sidebar-title">People</span>
 			                            <b class="caret"></b>
 			                        </a>
 			                        <ul id="submenu-1" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-user"><i class="fa fa-caret-right"></i>Add User</a></li>
-			                            <li id="menu-sub-items"><a href="/manage-users"><i class="fa fa-caret-right"></i>Manage Users</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-users"><i class="fa fa-caret-right"></i>Users</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-vendors"><i class="fa fa-caret-right"></i>Vendors</a></li>
 			                        </ul>
 			                    </li>
 			                    <li id="menu-item">
@@ -109,7 +175,7 @@
 			                            <b class="caret"></b>
 			                        </a>
 			                        <ul id="submenu-3" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-product"><i class="fa fa-caret-right"></i>Add Product</a></li>
+			                            <li id="menu-sub-items"><a href="/add-product"><i class="fa fa-caret-right"></i>Add / Update Product</a></li>
 			                            <li id="menu-sub-items"><a href="/manage-products"><i class="fa fa-caret-right"></i>Manage Products</a></li>
 			                        </ul>
 			                    </li>
@@ -121,6 +187,7 @@
 			                        </a>
 			                        <ul id="submenu-4" class="panel-collapse collapse panel-switch" role="menu">
 			                            <li id="menu-sub-items"><a href="/sales"><i class="fa fa-caret-right"></i>New Sale</a></li>
+			                            
 			                        </ul>
 			                    </li>
 			                     <li id="menu-item">
@@ -135,28 +202,15 @@
 			                        </ul>
 			                    </li>
 			                    <li id="menu-item">
-			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-6">
-			                            <span class="sidebar-icon"><i class="fas fa-people-carry"></i></span>
-			                            <span class="sidebar-title">Vendors</span>
-			                            <b class="caret"></b>
-			                        </a>
-			                        <ul id="submenu-6" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-vendor"><i class="fa fa-caret-right"></i>Add Vendor</a></li>
-			                            <li id="menu-sub-items"><a href="/manage-vendors"><i class="fa fa-caret-right"></i>Manage Vendors</a></li>
-			                        </ul>
-			                    </li>
-			                    <li id="menu-item">
 			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-7">
 			                            <span class="sidebar-icon"><i class="fas fa-cubes"></i></span>
 			                            <span class="sidebar-title">Stock</span>
 			                            <b class="caret"></b>
 			                        </a>
 			                        <ul id="submenu-7" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-stock"><i class="fa fa-caret-right"></i>Add New Item</a></li>
-			                            <li id="menu-sub-items"><a href="/update-stock"><i class="fa fa-caret-right"></i>Update Stock</a></li>
-			                        </ul>
-			                    </li>
-			                    <li id="menu-item">
+			                            <li id="menu-sub-items"><a href="/add-stock"><i class="fa fa-caret-right"></i>Add / Update Stock</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-stock"><i class="fa fa-caret-right"></i>Manage Stock</a></li>			                        </ul>
+			                    </li>			                    <li id="menu-item">
 			                        <a href="/reports">
 			                            <span class="sidebar-icon"><i class="far fa-chart-bar"></i></span>
 			                            <span class="sidebar-title">Reports</span>
@@ -166,85 +220,145 @@
 			            </aside>            
 			        </div>
 			        <div id="content-wrapper" style="height:540px">
-				        	<div class="breadcrumb-section">
-								<a href="/home" class="inactive" >Home</a>
-								<a href="/add-product" class="active">Add Product</a>
+			        		<div class="breadcrumb-wrapper">
+						        	<div class="breadcrumb-section">
+										<a href="/home" class="inactive" >Home</a>
+										<a href="/add-product" class="active">Add / Update Product</a>
+									</div>
 							</div>
-							<div id="validated-form">
-								    <div  v-if="show">
-								        <div class="success-modal">
-								            <span class="success-close-button" v-on:click="closeModal">&times;</span>
-								             <p class="success-modal-title">Success &nbsp;<i class="fas fa-check-circle"></i></p>
-								             <p class="desc">Product Added Successfully</p>  
-								        </div>	
-								    </div>
-										<form class="addProductForm">
+							<div class="product-wrapper">
+									<div class="add-product-section"><div id="product-section">Add New Product</div>
+										<div id="addProduct-form">
+												    <div  v-if="show">
+												        <div class="success-modal">
+												            <span class="success-close-button" v-on:click="closeModal">&times;</span>
+												             <p class="success-modal-title">Product added Successfully &nbsp;<i class="fas fa-check-circle"></i></p>  
+												        </div>	
+												    </div>
+														<form class="addProductForm">
+								
+																	   <div class="form-group col-md-12" >
+																	           <label for="productName">Product Name</label>
+																	           <input type="text" 
+																	                  class="form-control"
+																	                  name="productName" 
+																	                  placeholder="" 
+																	                  value="" 
+																	                  id="productName" 
+																	                  v-model="productName" required>
+																	            <span class="text-danger" 
+																		               v-if="validationErrors.productName" 
+																		             v-text="validationErrors.productName">
+																		        </span>
+																	
+																	   </div>
+																	   <div class="form-group col-md-12">
+																	           <label>Product No</label>
+																	           <input type="text" 
+																	                  class="form-control" 
+																	                  name="productNo"
+																	                  placeholder=""
+																	                  value="" 
+																	                  id="productNo" 
+																	                  v-model="productNo" required>
+																	            <span class="text-danger" 
+																	            	   v-if="validationErrors.productNo" 
+																	            	 v-text="validationErrors.productNo">
+																	            </span>
+																	   </div>
+																	   <div class="form-group col-md-12">
+																	           <label>Quantity</label>
+																	           <input type="number" 
+																	                  class="form-control" 
+																	                  name="quantity"
+																	                  placeholder=""
+																	                  value="" 
+																	                  id="quantity" 
+																	                  v-model="quantity" required>
+																	            <span class="text-danger" 
+																	            	   v-if="validationErrors.quantity"
+																	            	 v-text="validationErrors.quantity">
+																	            </span>
+																	   </div>
+															            <button type="button" 
+															                    class="btn" 
+															                     @click.prevent="resetForm">Reset
+															            </button>
+													                      <button class="btn btn-success" 
+													                      type="submit" 
+													                      @click.prevent="saveProduct">Save
+													                      </button>
 				
-													   <div class="form-group">
-													           <label for="productName">Product Name</label>
-													           <input type="text" 
-													                  class="form-control"
-													                  name="productName" 
-													                  placeholder="" 
-													                  value="" 
-													                  id="productName" 
-													                  v-model="productName" required>
-													            <span class="text-danger" 
-														               v-if="validationErrors.productName" 
-														             v-text="validationErrors.productName">
-														        </span>
-													
-													   </div>
-													   <div class="form-group">
-													           <label>Product No</label>
-													           <input type="text" 
-													                  class="form-control" 
-													                  name="productNo"
-													                  placeholder=""
-													                  value="" 
-													                  id="productNo" 
-													                  v-model="productNo" required>
-													            <span class="text-danger" 
-													            	   v-if="validationErrors.productNo" 
-													            	 v-text="validationErrors.productNo">
-													            </span>
-													   </div>
-													   <div class="form-group">
-													           <label>Quantity</label>
-													           <input type="number" 
-													                  class="form-control" 
-													                  name="quantity"
-													                  placeholder=""
-													                  value="" 
-													                  id="quantity" 
-													                  v-model="quantity" required>
-													            <span class="text-danger" 
-													            	   v-if="validationErrors.quantity"
-													            	 v-text="validationErrors.quantity">
-													            </span>
-													   </div>
-											            <button type="button" 
-											                    class="btn" 
-											                     @click.prevent="resetForm">Reset
-											            </button>
-									                      <button class="btn btn-success" 
-									                      type="submit" 
-									                      @click.prevent="saveProduct()">Save
-									                      </button>
+								                    </form>
+															  
+											</div>
 
-				                    </form>
-											  
-						 </div>
+									</div>
+									<div class="update-product-section"><div id="product-section">Update Product</div>
+									 	<div id="updateProduct-form">
+												    <div  v-if="show">
+												        <div class="success-modal">
+												            <span class="success-close-button" v-on:click="closeModal">&times;</span>
+												             <p class="success-modal-title">Product updated Successfully &nbsp;<i class="fas fa-check-circle"></i></p>  
+												        </div>	
+												    </div>
+														<form class="updateProductForm">
+
+																	   <div class="form-group col-md-12" >
+																	           <label for="productName">Product Name</label>
+																						<select v-model="product" class="form-control">	
+																							<option :value="{}" disabled> --select product-- </option>
+																							<option v-for="product in products" v-bind:value="product">{{product.productName}}</option>
+																						</select>
+																	            <span class="text-danger" 
+																		               v-if="validationErrors.productName" 
+																		             v-text="validationErrors.productName">
+																		        </span>
+																	  </div>
+																	   <div class="form-group col-md-12">
+																	           <label>Product No</label>
+																	           <input type="text" 
+																	                  class="form-control"  
+																	                  v-bind:value="product.productNo" disabled>
+																	            <span class="text-danger" 
+																		               v-if="validationErrors.productNo" 
+																		             v-text="validationErrors.productNo">
+																		        </span>
+
+																	   </div>
+																	   <div class="form-group col-md-12">
+																	           <label>Processed Quantity</label>
+																	           <input type="number" 
+																	                  class="form-control"																	                  																	                  name="quantity"
+																	                  placeholder=""
+																	                  value="" 
+																	                  id="processedQuantity"   
+																	                  v-model="processedQuantity" required>
+																	            <span class="text-danger" 
+																		               v-if="validationErrors.processedQuantity" 
+																		             v-text="validationErrors.processedQuantity">
+																		        </span>
+																	   </div>
+													                      <button class="btn btn-info" 
+													                      type="submit" 
+													                      @click.prevent="updateProduct(product,processedQuantity,id)">Update
+													                      </button>				
+														 </form>
+									              </div>
+									 
+							</div>
 			        </div>
 			        <div id="footer">
 			        <p>Copyright &copy;2019&nbsp;|&nbsp;All Rights Reserved</p>
 			        </div>
-			    </div> 
-  <script type="text/javascript">
- var app = new Vue({
-	    el: '#validated-form',
+			    </div>
+	</div> 
+<script type="text/javascript">
+ var app1 = new Vue({
+	    el: '#addProduct-form',
 	    data: function () {
 	        return {
+	        	products:Array,
                 productName: '',
                 productNo: '',
                 quantity: '',
@@ -262,17 +376,13 @@
 	        saveProduct:function() {
 	            if (this.validateForm()) {
 	                //submit form to backend
-		   	           axios.post('/api/products/save',{
-			   	             productName:this.productName,
-			   	             productNo:this.productNo,
-			   	             quantity:this.quantity
-			   	           });
+		   	           axios.post('/api/products/save',this.newProduct);
 			   	      //show success Modal
 			   	      this.show=true
 	            }
 	        },
 	        validateForm:function() {
-	            var formId = 'validated-form';
+	            var formId = 'addProduct-form';
 	            var nodes = document.querySelectorAll(`#${formId} :invalid`);
 	            var errorObjectName = 'validationErrors';
 	            var vm = this; //current vue instance;
@@ -304,9 +414,89 @@
 	    		this.quantity='',
 	    		this.show=false
 	    	}
+	    },
+	    computed:{
+	    	newProduct:function(){
+	    		return {
+	    			productName:this.productName,
+	   	            productNo:this.productNo,
+	   	            quantity:this.quantity
+	    		}
+	    	}
 	    }
+		 
 	});
-  
+ var app2 = new Vue({
+	    el: '#updateProduct-form',
+	    data: function () {
+	        return {
+	         products:Array,
+	         product:{},	
+	         id:'',
+             productName: '',
+             productNo: '',
+             processedQuantity:'',
+	            validationErrors: {
+	                productName: null,
+	                productNo: null,
+	                processedQuantity: null
+	    	        
+	            },
+	            show:false
+	        }
+
+	    },
+	    created: function () {
+		      this.fetchProducts();
+		    },
+	    methods: {
+	    	fetchProducts: function () {
+	    	      axios.get('/api/products').then(function (response) {
+	    	        this.products = response.data
+	    	      }.bind(this)).catch(function (error) {
+	    	        console.log('Error while fetching product data: ' + error)
+	    	      })
+	    	    },
+	        updateProduct:function(product,processedQuantity,id){
+	            if (this.validateForm()) {
+		   	          axios.put(`/api/products/${product.id}/quantity?quantity=${processedQuantity}`);
+			   	      //show success Modal
+			   	      this.show=true
+	            }
+	        },
+	        validateForm:function() {
+	            var formId = 'updateProduct-form';
+	            var nodes = document.querySelectorAll(`#${formId} :invalid`);
+	            var errorObjectName = 'validationErrors';
+	            var vm = this; //current vue instance;
+
+	            Object.keys(this[errorObjectName]).forEach(key => {
+	                this[errorObjectName][key] = null
+	            });
+
+	            if (nodes.length > 0) {
+	                nodes.forEach(node => {
+	                    this[errorObjectName][node.name] = node.validationMessage;
+	                    node.addEventListener('change', function (e) {
+	                        vm.validateForm();
+	                    });
+	                });
+
+	                return false;
+	            }
+	            else {
+	                return true;
+	            }
+	        },
+	        closeModal:function(){
+	  			this.show=false
+	  		},
+
+	    }
+		 
+	});
+
+
   
   </script>
   

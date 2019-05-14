@@ -348,7 +348,7 @@
 	font-size: 16px;
 	line-height: 36px;
 	color: white;
-	padding: 0 10px 0 60px;
+	padding: 0 10px 0 30px;
 	background: #666;
 	background: linear-gradient(#666, #333);
 	position: relative;
@@ -357,7 +357,7 @@
 }
 
 .breadcrumb-section a:first-child {
-	padding-left: 46px;
+	padding-left: 30px;
 	border-radius: 5px 0 0 5px; /
 }
 .breadcrumb-section a:last-child {
@@ -400,12 +400,12 @@
 
 /*Success Modal*/
 .success-modal {
-    	margin:auto;
+	    position:fixed;
         background-color: forestgreen;
-        padding: 1rem 1.5rem;
-        width: 40%;
-        height:5%;
-        border-radius: 0.4rem;
+        margin-top:5px;
+        margin-left:10px;
+        width: 30%;
+        height:6%;
         opacity: 1;
         transition: visibility 0s 2s, opacity 2s linear;
     } 
@@ -416,7 +416,7 @@
         line-height: 1.5rem;
         text-align: center;
         cursor: pointer;
-        border-radius: 0.25rem;
+        border-radius: 50%;
         background-color: lightgray;
     }    
     .success-close-button {
@@ -425,21 +425,22 @@
         line-height: 1.5rem;
         text-align: center;
         cursor: pointer;
-        border-radius: 0.25rem;
+        border-radius: 50%;
         background-color: lightgray;
     }
     .success-close-button:hover {
         background-color: darkgray;
     }
-    .modal-app{
+ /*   .modal-app{
     	top,left:50%;
     	width: 40%;
     	height: 5%;
-    }
+    }*/
     .success-modal-title{
     	color: white;
     	text-align: center;
     	font-weight: bold;
+    	padding-top:5px;
     }
     .desc{
     	padding-top:2px;
@@ -487,7 +488,6 @@
 
 	
 }
-
 
 
 

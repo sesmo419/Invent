@@ -16,11 +16,6 @@ public class PagesController {
 
 		return "companyinfo";
 	}
-	@GetMapping("/add-user")
-	public String addUser() {
-
-		return "add-user";
-	}
 	@GetMapping("/manage-users")
 	public String manageUser() {
 
@@ -40,11 +35,6 @@ public class PagesController {
 	public String newSale() {
 
 		return "sales";
-	}
-	@GetMapping("/add-vendor")
-	public String addVendor() {
-
-		return "add-vendor";
 	}
 	@GetMapping("/manage-vendors")
 	public String manageVendors() {
@@ -66,10 +56,10 @@ public class PagesController {
 
 		return "add-stock";
 	}
-	@GetMapping("update-stock")
-	public String updateStock() {
+	@GetMapping("manage-stock")
+	public String manageStock() {
 
-		return "update-stock";
+		return "manage-stock";
 	}
 	@GetMapping("reports")
 	public String getReports() {

@@ -11,18 +11,75 @@
   <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/fontawesome-5.8.1/css/all.css"/>
   <link rel="stylesheet" href="/css/jquery.dataTables.min.css"> 
+  <link rel="stylesheet" href="/css/editor.dataTables.min.css">
+  <link rel="stylesheet" href="/css/select.dataTables.min.css" />
+<link rel="stylesheet" href="/css/buttons.dataTables.min.css" />
   <script type="text/javascript" src="/js/jquery-3.4.0.min.js" ></script>
   <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script> 
   <script type="text/javascript"  src="/js/bootstrap-table.min.js"></script> 
- <script type="text/javascript"  src="/js/datatable.js"></script> 
+  <script type="text/javascript"  src="/js/datatable.js"></script> 
   <script type="text/javascript"  src="/js/vue.js"></script>
   <script type="text/javascript"  src="/js/axios.min.js"></script>
   <script type="text/javascript"  src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+   <script type="text/javascript"  src="/js/prefixfree-1.0.7.js"></script>
   <script type="text/javascript"  src="/js/invent-scripts.js"></script>
   <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript"  src="/js/dataTables.editor.min.js"></script>
+  <script type="text/javascript" src="/js/dataTables.select.min.js"></script>
+  <script type="text/javascript" src="/js/dataTables.buttons.min.js"></script>
+  <style>
+  .fa-trash-alt{
+	cursor:pointer;
+}
+.fa-edit{
+	cursor:pointer;
+}
+table {
+	width:100%;
+	table-layout:fixed;
+	margin:10px;
+}
+th, td {
+	padding:5px 10px;
+}
+thead, tfoot {
+	display:table;
+	width:100%;
+	width:calc(100% - 18px);
+}
+tbody {
+	height:350px;
+	overflow:auto;
+	overflow-x:hidden;
+	display:block;
+	width:100%;
+	background:Lavender;
+}
+tbody tr {
+	display:table;
+	width:100%;
+	table-layout:fixed;
+}
+#userInput{
+	border-radius:30px;
+	background:#686d77;	
+	text-align:center;
+	color:white;
+	padding:6px;
+
+}
+*:focus::-webkit-input-placeholder { 
+	opacity: 0; 
+} 
+::-webkit-input-placeholder{
+	color:white;
+	font-family:Helvetica;
+	font-size:12px;
+}
+  </style>
 </head>
 <body>
-<div id="app">
+
 			 <div id="navbar-wrapper">
 			        <header>
 			            <nav class="navbar navbar-default navbar-fixed-top " id="nav-bg" role="navigation">
@@ -70,12 +127,12 @@
 			                    <li id="menu-item">
 			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-1">
 			                            <span class="sidebar-icon"><i class="fa fa-users"></i></span>
-			                            <span class="sidebar-title">Users</span>
+			                            <span class="sidebar-title">People</span>
 			                            <b class="caret"></b>
 			                        </a>
 			                        <ul id="submenu-1" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-user"><i class="fa fa-caret-right"></i>Add User</a></li>
-			                            <li id="menu-sub-items"><a href="/manage-users"><i class="fa fa-caret-right"></i>Manage Users</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-users"><i class="fa fa-caret-right"></i>Users</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-vendors"><i class="fa fa-caret-right"></i>Vendors</a></li>
 			                        </ul>
 			                    </li>
 			                    <li id="menu-item">
@@ -95,7 +152,7 @@
 			                            <b class="caret"></b>
 			                        </a>
 			                        <ul id="submenu-3" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-product"><i class="fa fa-caret-right"></i>Add Product</a></li>
+			                            <li id="menu-sub-items"><a href="/add-product"><i class="fa fa-caret-right"></i>Add / Update Product</a></li>
 			                            <li id="menu-sub-items"><a href="/manage-products"><i class="fa fa-caret-right"></i>Manage Products</a></li>
 			                        </ul>
 			                    </li>
@@ -107,6 +164,7 @@
 			                        </a>
 			                        <ul id="submenu-4" class="panel-collapse collapse panel-switch" role="menu">
 			                            <li id="menu-sub-items"><a href="/sales"><i class="fa fa-caret-right"></i>New Sale</a></li>
+			                            
 			                        </ul>
 			                    </li>
 			                     <li id="menu-item">
@@ -121,27 +179,15 @@
 			                        </ul>
 			                    </li>
 			                    <li id="menu-item">
-			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-6">
-			                            <span class="sidebar-icon"><i class="fas fa-people-carry"></i></span>
-			                            <span class="sidebar-title">Vendors</span>
-			                            <b class="caret"></b>
-			                        </a>
-			                        <ul id="submenu-6" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-vendor"><i class="fa fa-caret-right"></i>Add Vendor</a></li>
-			                            <li id="menu-sub-items"><a href="/manage-vendors"><i class="fa fa-caret-right"></i>Manage Vendors</a></li>
-			                        </ul>
-			                    </li>
-			                    <li id="menu-item">
 			                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-7">
 			                            <span class="sidebar-icon"><i class="fas fa-cubes"></i></span>
 			                            <span class="sidebar-title">Stock</span>
 			                            <b class="caret"></b>
 			                        </a>
 			                        <ul id="submenu-7" class="panel-collapse collapse panel-switch" role="menu">
-			                            <li id="menu-sub-items"><a href="/add-stock"><i class="fa fa-caret-right"></i>Add New Item</a></li>
-			                            <li id="menu-sub-items"><a href="/update-stock"><i class="fa fa-caret-right"></i>Update Stock</a></li>
-			                        </ul>
-			                    </li>
+			                            <li id="menu-sub-items"><a href="/add-stock"><i class="fa fa-caret-right"></i>Add / Update Stock</a></li>
+			                            <li id="menu-sub-items"><a href="/manage-stock"><i class="fa fa-caret-right"></i>Manage Stock</a></li>			                        </ul>
+			                    </li>			                  
 			                    <li id="menu-item">
 			                        <a href="/reports">
 			                            <span class="sidebar-icon"><i class="far fa-chart-bar"></i></span>
@@ -154,13 +200,341 @@
 			        <div id="content-wrapper">
 							<div class="breadcrumb-section">
 								<a href="/home" class="inactive" >Home</a>
-								<a href="/manage-vendors" class="active">Manage Vendors</a>
+								<a href="/add-vendor" class="active">Add / Manage Vendors</a>
 							</div>
-			        </div>
+				        <table class="table table-hover header-fixed" id="dataTable">
+					        		<thead>
+					        			<tr>
+					        				<th colspan="5"> 
+                                                 <div class="btn-addNew"><p href="#modal-1" data-toggle="modal" id="addNew-text"><i class="fas fa-plus-circle"></i>&nbsp;<span class="addNew-txt">Add New</span></p></div>
+							        			 <a><input type="text" id="userInput" onkeyup="searchVendor()" placeholder="Search vendors..."></a>
+							        			 <div class="btn-refresh" v-on:click="fetchVendors"><p id="refresh-text"><span class="refresh-txt">Refresh</span>&nbsp;<i class="fas fa-sync-alt "></i></p></div>
+							        			 
+							        		</th>
+					        			</tr>
+					        		</thead>
+				                   <thead>
+				                        <tr style="background:#193666;color:white;">
+				                            <th class="col-xs-1" style="display:none;">ID</th>
+				                            <th class="col-xs-2">Vendor Name</th>
+				                            <th class="col-xs-3">Address</th>                       
+				                            <th class="col-xs-2">Company</th>
+				                            <th class="col-xs-2">Phone</th>
+				                            <th class="col-xs-1">Action</th>
+				                        </tr>
+				                    </thead>
+				              
+				                    <tbody>
+				                    	<tr v-for="(item,index) in vendors" style="border:none">
+				                    		<td class="col-xs-1" style="display:none;">{{item.id}}</td>
+				                            <td class="col-xs-2">{{item.vendorName}}</td>
+				                    		<td class="col-xs-3">{{item.address}}</td>
+				                    		<td class="col-xs-2">{{item.vendorCompany}}</td>
+				                    		<td class="col-xs-2">{{item.phone}}</td>
+				                    		<td class="col-xs-1">
+			                            <a href="#editVendorModal" 
+			                            	   v-on:click.prevent="fetchRowData(item,index)"
+				                               class="edit" data-toggle="modal"><i class="fas fa-edit" 
+				                               data-toggle="tooltip" 
+				                               title="Edit"></i>
+			                            </a> &nbsp; &nbsp;
+			                            <a href="#deleteVendorModal" 
+			                            		v-on:click.prevent="deleteVendor(item,index)"
+					                           	 class="delete" data-toggle="modal"><i class="fas fa-trash-alt" 
+					                           	 data-toggle="tooltip" 
+					                             title="Delete"></i>
+			                             </a>
+                       					 </td>
+				                    	</tr>
+				                    </tbody>
+				                    <tfoot>
+				                        <tr style="background:#193666;color:white;">
+				                            <th class="col-xs-1" style="display:none;">ID</th>
+				                            <th class="col-xs-2">Vendor Name</th>
+				                            <th class="col-xs-3">Address</th>                       
+				                            <th class="col-xs-2">Company</th>
+				                            <th class="col-xs-2">Phone</th>
+				                            <th class="col-xs-1">Action</th>
+				                        </tr>
+				                    </tfoot>
+                		</table>
+								        <!-- Add Modals HTML -->
+						                  <!-- #modal 1 -->
+						<div class="modal fade" id="modal-1">
+						      <div class="modal-dialog">
+						        <div class="modal-content" id="validated-form" v-pre>
+						          <div class="modal-header">
+						            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						            <h4 class="modal-title">Add Vendor</h4>
+						          </div>
+						          <form>
+						                  <div class="modal-body">
+
+				
+													   <div class="form-group" >
+													           <label for="VendorName">Vendor Name</label>
+													           <input type="text" 
+													                  class="form-control"
+													                  name="vendorName" 
+													                  placeholder="" 
+													                  value="" 
+													                  id="VendorName" 
+													                  v-model="vendorName" required>
+													            <span class="text-danger" 
+														               v-if="validationErrors.vendorName" 
+														             v-text="validationErrors.vendorName">
+														        </span>
+													
+													   </div>
+													   <div class="form-group">
+													           <label>Address</label>
+													           <input type="text" 
+													                  class="form-control" 
+													                  name="address"
+													                  placeholder=""
+													                  value="" 
+													                  id="address" 
+													                  v-model="address" required>
+													            <span class="text-danger" 
+													            	   v-if="validationErrors.address" 
+													            	 v-text="validationErrors.address">
+													            </span>
+													   </div>
+													   <div class="form-group">
+													           <label>Company</label>
+													           <input type="text" 
+													                  class="form-control" 
+													                  name="vendorCompany"
+													                  placeholder=""
+													                  value="" 
+													                  id="vendorCompany" 
+													                  v-model="vendorCompany" required>
+													            <span class="text-danger" 
+													            	   v-if="validationErrors.vendorCompany" 
+													            	 v-text="validationErrors.vendorCompany">
+													            </span>
+													   </div>
+													   <div class="form-group ">
+													           <label>Phone</label>
+													           <input type="text" 
+													                  class="form-control" 
+													                  name="phone"
+													                  placeholder=""
+													                  value="" 
+													                  id="phone" 
+													                  v-model="phone" required>
+													            <span class="text-danger" 
+													            	   v-if="validationErrors.phone"
+													            	 v-text="validationErrors.phone">
+													            </span>
+													   </div>									   
+											</div>	   
+									   <div class="modal-footer">
+												            <button type="button" 
+												                    class="btn" 
+												                     v-on:click.prevent="resetForm">Reset
+												            </button>
+										                    <button class="btn btn-success" 
+										                            type="submit" 
+										                            v-on:click.prevent="saveVendor">Save
+										                    </button>
+					                    </div>
+						         
+				                    </form>
+
+						          
+						        </div><!-- /.modal-content -->
+
+						      </div><!-- /.modal-dialog -->
+						                  </div><!-- /.modal -->  
+						
+
+				  <!-- Edit Modal HTML -->
+				  
+				  <div id="editVendorModal" class="modal fade">
+				    <div class="modal-dialog">
+				      <div class="modal-content">	    
+				        <form>
+				          <div class="modal-header">            
+				            <h4 class="modal-title">Edit Vendor</h4>
+				            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				          </div>
+				          <div class="modal-body">          
+				            <div class="form-group">
+				              <label>Vendor Name</label>
+				              <input type="text" class="form-control" v-model="rowData.vendorName" required>
+				            </div>
+				            <div class="form-group">
+				              <label>Address</label>
+				              <input type="text" class="form-control" v-model="rowData.address"  required>
+				            </div>
+				            <div class="form-group">
+				              <label>Company</label>
+				              <input type="text" class="form-control" v-model="rowData.vendorCompany" >
+				            </div> 
+				            <div class="form-group">
+				              <label>Phone</label>
+				              <input type="text" class="form-control" v-model="rowData.phone"  required>
+				            </div>         
+				          </div>
+				          <div class="modal-footer">
+								<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+            					<input type="submit" class="btn btn-info" v-on:click.prevent="updateVendor(rowData,id)" value="Save">
+				          </div>
+				        </form>
+				      </div>
+				    </div>
+				  </div>
+				 
+				  <!-- Delete Modal HTML -->
+				  
+				  <div id="deleteVendorModal" class="modal fade">
+				    <div class="modal-dialog">
+				      <div class="modal-content">
+				        <form>
+				          <div class="modal-header">            
+				            <h4 class="modal-title">Delete Vendor</h4>
+				            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				          </div>
+				          <div class="modal-body">          
+				            <p>Are you sure you want to delete this Vendor?</p>
+				            <p class="text-warning"><small>This action cannot be undone.</small></p>
+				          </div>
+				          <div class="modal-footer">
+				            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+				            <input type="submit" class="btn btn-danger" value="Delete">
+				          </div>
+				        </form>
+				      </div>
+				    </div>
+				  </div>										
+			</div>
 			        <div id="footer">
 			        <p>Copyright &copy;2019&nbsp;|&nbsp;All Rights Reserved</p>
 			        </div>
 			    </div> 
-    </div>  
+ <script type="text/javascript">
+  var app1=new Vue({
+	    el: '#content-wrapper',
+	    data: function () {
+	      return {
+	        vendors: Array,
+	        rowData:{},
+	        id:'',
+	        vendorName:'',
+	        vendorCompany:'',
+	        address:'',
+	        phone:''
+	      }
+	      
+	    },
+	    mounted: function () {
+	      this.fetchVendors();
+	    },
+	    methods: {
+	    	fetchVendors: function () {
+	    	      axios.get('/api/vendors/').then(function (response) {
+	    	        this.vendors = response.data
+	    	      }.bind(this)).catch(function (error) {
+	    	        console.log('Error while fetching product data: ' + error)
+	    	      })
+	    	    },
+    	    fetchRowData: function (item,id) {
+	    	      axios.get('/api/vendors/'+item.id).then(function (response) {
+	    	        this.rowData = response.data
+	    	      }.bind(this))
+	    	      console.log(this.rowData)
+	    	    },
+    	    updateVendor:function(rowData,id) {
+		   	           axios.put('/api/vendors/'+rowData.id,this.updatedVendor)
+	        },
+		    deleteVendor:function(item,id){
+		    	axios.delete('/api/vendors/'+item.id)
+		    	.then(response=>{
+		    		this.vendor.splice(id,1)
+		    	})
+		    }
+		 },  
+	    computed:{
+	    	updatedVendor:function(){
+	    		return {
+	    			id:this.rowData.id,
+		    		vendorName:this.rowData.vendorName,
+		    		address:this.rowData.address,
+		    		vendorCompany:this.rowData.vendorCompany,
+		    		phone:this.rowData.phone
+	    		}
+	    		
+	    	}
+	    }
+	  });
+	  var app2 = new Vue({
+		    el: '#validated-form',
+		    data: function () {
+		        return {
+	                vendorName: '',
+	                address: '',
+	                vendorCompany: '',
+	                phone:'',
+		            validationErrors: {
+		                vendorName: null,
+		                address: null,
+		                vendorCompany: null,
+		                phone: null
+		    	        
+		            }
+		        }
+
+		    },
+		    methods: {
+		        saveVendor:function() {
+		            if (this.validateForm()) {
+		                //submit form to backend
+			   	           axios.post('/api/vendors/save',{
+				   	             vendorName:this.vendorName,
+				   	             address:this.address,
+				   	          	 vendorCompany:this.vendorCompany,
+				   	          	 phone:this.phone
+				   	           }).then(this.resetForm())
+		            }
+		        },
+		        validateForm:function() {
+		            var formId = 'validated-form';
+		            var nodes = document.querySelectorAll(`#${formId} :invalid`);
+		            var errorObjectName = 'validationErrors';
+		            var vm = this; //current vue instance;
+
+		            Object.keys(this[errorObjectName]).forEach(key => {
+		                this[errorObjectName][key] = null
+		            });
+
+		            if (nodes.length > 0) {
+		                nodes.forEach(node => {
+		                    this[errorObjectName][node.name] = node.validationMessage;
+		                    node.addEventListener('change', function (e) {
+		                        vm.validateForm();
+		                    });
+		                });
+
+		                return false;
+		            }
+		            else {
+		                return true;
+		            }
+		        },
+		        closeModal:function(){
+		  			this.show=false
+		  		},
+		  		resetForm:function(){
+		    		this.vendorName='',
+		    		this.address='',
+		    		this.vendorCompany='',
+		    		this.phone='',
+		    		this.show=false
+		    	}
+		    }
+		})
+	  
+  </script>  
 </body>
 </html>

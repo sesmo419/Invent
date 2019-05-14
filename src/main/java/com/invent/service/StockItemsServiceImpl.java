@@ -1,5 +1,6 @@
 package com.invent.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,9 @@ public class StockItemsServiceImpl implements StockItemsService {
 	}
 
 	@Override
-	public int increaseStockItemQuantity(Long id, int quantity) {
+	public int increaseStockItemQuantity(Long id, int quantity,Date dateReceived) {
 		
-		return stockItemsDao.increaseStockItemQuantity(id, quantity);
+		return stockItemsDao.increaseStockItemQuantity(id, dateReceived,quantity);
 	}
 
 	@Override
@@ -56,9 +57,6 @@ public class StockItemsServiceImpl implements StockItemsService {
 		return stockItemsDao.findStockItemsByVendorVendorName(vendorName);
 	}
 
-	
-
-	
 	
 	
 

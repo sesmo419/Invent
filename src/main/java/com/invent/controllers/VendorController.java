@@ -1,6 +1,7 @@
 package com.invent.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,11 @@ public class VendorController {
 		
 		return vendorService.getAllVendorsRecords();
 	}
-
+	@GetMapping("/{id}")
+	public Optional<VendorModel> getVendorRecordById(@PathVariable Long id) {
+		
+		return vendorService.getVendorRecordById(id);
+	}
 	@GetMapping("/name")
 	public List<VendorModel> getVendorRecordByVendorName(@RequestParam("name") String vendorName) {
 		
@@ -53,10 +58,10 @@ public class VendorController {
 		vendorService.deleteVendorRecordById(id);;
 	}
 
-	@PutMapping("/update")
-	public void updateVendorRecord(@RequestBody VendorModel vendor) {
+	@PutMapping("/{id}")
+	public void updateVendorRecord(@RequestBody VendorModel vendor, @PathVariable Long id) {
 		
-		vendorService.updateVendorRecord(vendor);
+		vendorService.updateVendorRecord(vendor,id);
 	}
 
 }
