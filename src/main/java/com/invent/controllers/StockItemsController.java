@@ -1,7 +1,8 @@
 package com.invent.controllers;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -39,7 +40,13 @@ public class StockItemsController {
 		
 		return stockItemsService.getAllStockItems();
 	}
-
+	
+	@GetMapping("/item/{id}")
+	public StockItemsModel getStockItemById(@PathVariable Long id) {
+		
+		return stockItemsService.getStockItemById(id);
+	}
+	
 	@GetMapping("/{vendorId}")
 	public List<StockItemsModel> getAllStockItemsByVendorId(@PathVariable Long vendorId) {
 		
@@ -61,7 +68,11 @@ public class StockItemsController {
 		}).orElseThrow(() -> new NotFoundException("Vendor not found!"));
 		
 	}
-
+	@PutMapping("/{id}/update")
+	public void updateStockItem(@PathVariable Long id,@Param("stockItemName") String stockItemName, @Param("quantity") int quantity,@Param("dateReceived") Date dateReceived) {
+		
+		stockItemsService.updateStockItem(id, stockItemName,quantity, dateReceived);
+	}
 	@PutMapping("/{id}/stockIn")
 	public int increaseStockItemQuantity(@PathVariable Long id, @Param("quantity") int quantity,@Param("dateReceived") Date dateReceived) {
 			

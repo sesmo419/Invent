@@ -1,7 +1,8 @@
 package com.invent.service;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,19 @@ public class StockItemsServiceImpl implements StockItemsService {
 		
 		return stockItemsDao.findStockItemsByVendorVendorName(vendorName);
 	}
+
+	@Override
+	public void updateStockItem(Long id,String stockItemName,int quantity,Date dateReceived) {
+		
+		stockItemsDao.updateStockItem(id,stockItemName, dateReceived, quantity);
+	}
+
+	@Override
+	public StockItemsModel getStockItemById(Long id) {
+		
+		return stockItemsDao.getOne(id);
+	}
+
 
 	
 	

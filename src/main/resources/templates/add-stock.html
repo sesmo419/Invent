@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/images/favicon.ico"/>
   <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/datepicker.min.css" />
   <link rel="stylesheet" href="/css/custom-fonts.css"/>
   <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/fontawesome-5.8.1/css/all.css"/>
@@ -20,6 +21,7 @@
   <script type="text/javascript"  src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript"  src="/js/invent-scripts.js"></script>
   <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script>
+   <script type="text/javascript"  src="/js/datepicker.min.js"></script>
   <style>
 .wrapper {	
   margin-top: 80px;
@@ -340,15 +342,12 @@
 																	            	 v-text="validationErrors.newQuantity">
 																	            </span>
 																	   </div>
-																	   <div class="form-group col-md-12">
-																	           <label>Date</label>
-																	           <input type="text" 
+																	   <div class="form-group col-md-12" >
+																				<label>Date</label>
+																	           <input type="date" 
 																	                  class="form-control" 
 																	                  name="stockInDate"
-																	                  placeholder="dd/mm/yyyy"
-																	                  size=10
-																	                  maxlength=10
-																	                  onkeyup="this.value=this.value.replace(/^(\d\d)(\d)$/g,'$1/$2').replace(/^(\d\d\/\d\d)(\d+)$/g,'$1/$2').replace(/[^\d\/]/g,'')"
+																	                  placeholder=""
 																	                  value="" 
 																	                  id="stockInDate" 
 																	                  v-model="stockInDate" required>
@@ -356,7 +355,7 @@
 																	            	   v-if="validationErrors.stockInDate"
 																	            	 v-text="validationErrors.stockInDate">
 																	            </span>
-																	   </div>
+																	    </div>
 															            <button type="button" 
 															                    class="btn" 
 															                     @click.prevent="resetForm">Reset
@@ -392,7 +391,6 @@
 	                vendorName: null,
 	                stockItemName: null,
 	                quantity: null,
-	    	        dateReceived:null
 	            },
 	            show:false
 	        }
@@ -475,7 +473,6 @@
 	            validationErrors: {
 	                stockItemName: null,
 	                newQuantity: null,
-	                stockInDate: null
 	    	        
 	            },
 	            show:false
@@ -536,10 +533,9 @@
 
 	    }
 		 
-	});
+	})
 
-
-  
+ 
   </script>
 </body>
 </html>

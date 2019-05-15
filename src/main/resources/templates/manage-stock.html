@@ -9,51 +9,39 @@
   <link rel="stylesheet" href="/css/styles.css" />
   <link rel="stylesheet" href="/css/custom-fonts.css"/>
   <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/fontawesome-5.8.1/css/all.css"/>
-  <link rel="stylesheet" href="/css/jquery.dataTables.min.css"> 
-  <script type="text/javascript" src="/js/jquery-3.4.0.min.js" ></script>
-  <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script> 
-  <script type="text/javascript"  src="/js/bootstrap-table.min.js"></script> 
- <script type="text/javascript"  src="/js/datatable.js"></script> 
+  <link rel="stylesheet" href="/fontawesome-5.8.1/css/all.css"/> 
+  <script type="text/javascript" src="/js/jquery-3.4.0.min.js" ></script> 
   <script type="text/javascript"  src="/js/vue.js"></script>
   <script type="text/javascript"  src="/js/axios.min.js"></script>
   <script type="text/javascript"  src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript"  src="/js/invent-scripts.js"></script>
-  <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script>
     <style>
   
-.fa-trash-alt{
+.fa-trash-alt,.fa-edit,.fa-eye{
 	cursor:pointer;
 }
-.fa-edit{
-	cursor:pointer;
+.fa-eye{
+	color:#5b0a4e;;
 }
 table {
-	width:100%;
-	table-layout:fixed;
-	margin:10px;
-}
-th, td {
-	padding:5px 10px;
-}
-thead, tfoot {
-	display:table;
-	width:100%;
-	width:calc(100% - 18px);
-}
-tbody {
-	height:350px;
-	overflow:auto;
-	overflow-x:hidden;
-	display:block;
-	width:100%;
-	background:Lavender;
-}
-tbody tr {
-	display:table;
-	width:100%;
-	table-layout:fixed;
-}
+         width: 100%; 
+         border-collapse: collapse;
+       }
+  td {
+         border: 1px solid black; 
+         text-align:center;
+          padding:2.5px;
+     }
+     th {
+         background: lightblue;
+         border: 1px solid black; 
+         text-align:center;
+         padding:4px;
+     }
+  td table { 
+    margin: -2px;
+    width: calc(100% + 4px);
+  }
 #userInput{
 	border-radius:30px;
 	background:#686d77;	
@@ -197,12 +185,193 @@ tbody tr {
 								<a href="/home" class="inactive" >Home</a>
 								<a href="/update-stock" class="active">Manage Stock</a>
 							</div>
+							<div>
+										<table>
+										      <tr>
+										        <th style="background:#505914;color:white">Vendor</th>
+										        <th style="background:#067c2d;color:white">Stock Items</th>
+										      </tr>
+										    
+										      <tr v-for="(vendor,index) in vendors">
+										        <td style="background:#c4983a;font-size:16px"><b>{{vendor.vendorName}}</b>&nbsp; 
+										        	<i class="fas fa-eye" v-on:click.prevent="fetchVendorDetails(vendor,index)" href="#vendor-details-modal" data-toggle="modal"></i></td>
+										        <td>
+										    
+										          <!-- nested row -->
+										          <table>
+										      <tr>
+										        <th style="border-top:none;border-left:none">Item Name</th>
+										        <th style="border-top:none">Quantity</th>
+										        <th style="border-top:none">Date ( Last Stock-In )</th>
+										        <th style="border-top:none">Action</th>
+										      </tr>
+										           <tr v-for="(item,index) in vendor.stockItems" style="background:#b7a171" >
+										             <td style="border-left:none;border-bottom:none">{{item.stockItemName}}</td>
+										             <td style="border-bottom:none;">{{item.quantity}}</td>
+										             <td style="border-bottom:none">{{item.dateReceived}}</td>
+										             <td  style="border-bottom:none">
+													  	<a href="#editStockItemModal"
+													  	v-on:click.prevent="fetchStockItem(item,index)"
+								                               class="edit" data-toggle="modal"><i class="fas fa-edit" 
+								                               data-toggle="tooltip" 
+								                               title="Edit"></i>
+							                            </a> &nbsp; &nbsp;
+							                            <a href="#deleteStockItemModal" 
+							                            v-on:click.prevent="fetchStockItem(item,index)"
+									                           	 class="delete" data-toggle="modal"><i class="fas fa-trash-alt" 
+									                           	 data-toggle="tooltip" 
+									                             title="Delete"></i>
+							                             </a>
+
+							                         </td>
+										           </tr>
+										          </table>
+										    
+										        </td>
+										      </tr>
+										</table>
+							</div>
+						                  <!-- #vendorDetails Modal -->
+						<div class="modal fade" id="vendor-details-modal">
+						      <div class="modal-dialog">
+						        <div class="modal-content">
+						          <div class="modal-header">
+						            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						          		<p><b>Vendor Details</b></p>
+						          </div>
+						                  <div class="modal-body">
+											<p><b>Name:</b>{{vendorDetails.vendorName}}</p>
+											<p><b>Address:</b>{{vendorDetails.address}}</p>	
+											<p><b>Company:</b>{{vendorDetails.vendorCompany}}</p>
+											<p><b>Phone:</b>{{vendorDetails.phone}}</p>
+					                    </div>
+
+
+						          
+						        </div><!-- /.modal-content -->
+
+						      </div><!-- /.modal-dialog -->
+						  </div><!-- /.modal -->
+
+				  <!-- Edit Stock Item Modal H -->
+				  
+					  <div id="editStockItemModal" class="modal fade">
+					    <div class="modal-dialog">
+					      <div class="modal-content">	    
+					        <form>
+					          <div class="modal-header">            
+					            <h4 class="modal-title">Edit StockItem</h4>
+					            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					          </div>
+					          <div class="modal-body">          
+					            <div class="form-group">
+					              <label>Stock Item Name</label>
+					              <input type="text" class="form-control" v-model="rowData.stockItemName" required>
+					            </div>
+					            <div class="form-group">
+					              <label>Quantity</label>
+					              <input type="number" class="form-control" v-model="rowData.quantity"  required>
+					            </div>
+					            <div class="form-group">
+					              <label>Date</label>
+					              <input type="date" class="form-control" v-model="rowData.dateReceived" >
+					            </div>          
+					          </div>
+					          <div class="modal-footer">
+									<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+	            					<input type="submit" class="btn btn-info" v-on:click.prevent="updateStockItem(rowData,stockItemName,quantity,dateReceived,id)"  data-dismiss="modal" value="Save">
+					          </div>
+					        </form>
+					      </div>
+					    </div>
+					  </div>
+					  
+				  <!-- Delete Modal HTML -->
+				  
+				  <div id="deleteStockItemModal" class="modal fade">
+				    <div class="modal-dialog">
+				      <div class="modal-content">
+				        <form>
+				          <div class="modal-header">            
+				            <h4 class="modal-title">Delete Stock Item</h4>
+				            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				          </div>
+				          <div class="modal-body">          
+				            <p>Are you sure you want to delete {{rowData.stockItemName}}?</p>
+				            <p class="text-warning"><small>This action cannot be undone.</small></p>
+				          </div>
+				          <div class="modal-footer">
+				            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+				            <button  class="btn btn-danger" v-on:click.prevent="deleteStockItem(rowData,id)" data-dismiss="modal">Delete</button>
+				          </div>
+				        </form>
+				      </div>
+				    </div>
+				  </div>
 			        </div>
 			        <div id="footer">
 			        <p>Copyright &copy;2019&nbsp;|&nbsp;All Rights Reserved</p>
 			        </div>
 			    </div> 
     </div>
-  
+<script type="text/javascript">
+  var app=new Vue({
+	    el: '#content-wrapper',
+	    data: function () {
+	      return {
+	        vendors: Array,
+	        rowData:{},
+	        vendorDetails:{},
+	        id:'',
+	        vendorName:'',
+	        vendorCompany:'',
+	        address:'',
+	        phone:'',
+	        stockItemName:'',
+	        quantity:'',
+	        dateReceived:''
+	      }
+	      
+	    },
+	    created: function () {
+	      this.fetchVendors();
+	    // this.fetchStockItem();
+	    },
+	    methods: {
+	    	fetchVendors: function () {
+	    	      axios.get('/api/vendors/').then(function (response) {
+	    	        this.vendors = response.data
+	    	      }.bind(this)).catch(function (error) {
+	    	        console.log('Error while fetching vendor data: ' + error)
+	    	      })
+	    	    },
+    		fetchVendorDetails: function (vendor,id) {
+	    	      axios.get('/api/vendors/'+vendor.id).then(function (response) {
+	    	        this.vendorDetails = response.data
+	    	      }.bind(this))
+	    	      console.log(this.vendorDetails)
+	    	    },
+	    	fetchStockItem: function (item,id) {
+	    	      axios.get('/api/stock-items/item/'+item.id).then(function (response) {
+	    	        this.rowData = response.data
+	    	      }.bind(this))
+	    	      console.log(this.rowData)
+	    	    },
+	    	updateStockItem:function(rowData,stockItemName,quantity,dateReceived,id) {
+	    		axios.put(`/api/stock-items/${rowData.id}/update?stockItemName=${rowData.stockItemName}&quantity=${rowData.quantity}&dateReceived=${rowData.dateReceived}`);
+	    			
+	    			this.fetchVendors();
+	    			
+	        },
+		    deleteStockItem:function(rowData,id){
+		    	axios.delete('/api/stock-items/'+rowData.id);
+		    	
+	    			this.fetchVendors();
+
+		    }
+	        
+		 }
+	  });
+	 </script>
 </body>
 </html>

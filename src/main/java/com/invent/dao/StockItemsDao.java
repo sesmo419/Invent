@@ -1,9 +1,10 @@
 package com.invent.dao;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 import java.util.List;
-
-
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -23,6 +24,12 @@ public interface StockItemsDao extends JpaRepository<StockItemsModel, Long> {
 	@Query("UPDATE StockItemsModel stock_items SET stock_items.quantity=stock_items.quantity+:quantity,stock_items.dateReceived=:dateReceived WHERE stock_items.id=:id")
 	public int increaseStockItemQuantity(@Param("id")Long id,@Param("dateReceived")Date dateReceived,
 								@Param("quantity")int quantity);
+	@Transactional
+	@Modifying(clearAutomatically=true)
+	@Query("UPDATE StockItemsModel stock_items SET stock_items.stockItemName=:stockItemName,stock_items.quantity=:quantity,stock_items.dateReceived=:dateReceived WHERE stock_items.id=:id")
+	public void updateStockItem(@Param("id")Long id,@Param("stockItemName") String stockItemName,@Param("dateReceived")Date dateReceived, 
+								@Param("quantity")int quantity);
+	
 	@Transactional
 	@Modifying(clearAutomatically=true)
 	@Query("UPDATE StockItemsModel stock_items SET stock_items.quantity=stock_items.quantity-:quantity WHERE stock_items.id=:id")

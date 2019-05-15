@@ -7,19 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/images/favicon.ico"/>
   <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
   <link rel="stylesheet" href="/css/custom-fonts.css"/>
   <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/fontawesome-5.8.1/css/all.css"/>
   <link rel="stylesheet" href="/css/jquery.dataTables.min.css"> 
   <script type="text/javascript" src="/js/jquery-3.4.0.min.js" ></script>
-  <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script> 
+    <script type="text/javascript"  src="/js/jquery-ui.min.js"></script>
+  <script type="text/javascript"  src="/js/jquery.timepicker.min.js"></script> 
   <script type="text/javascript"  src="/js/bootstrap-table.min.js"></script> 
  <script type="text/javascript"  src="/js/datatable.js"></script> 
   <script type="text/javascript"  src="/js/vue.js"></script>
   <script type="text/javascript"  src="/js/axios.min.js"></script>
   <script type="text/javascript"  src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript"  src="/js/invent-scripts.js"></script>
-  <script type="text/javascript"  src="/js/jquery.dataTables.min.js"></script>
+<style>
+
+
+</style>
+  
 </head>
 <body>
 <div id="app">
@@ -145,12 +151,41 @@
 								<a href="/home" class="inactive" >Home</a>
 								<a href="/reports" class="active">Reports</a>
 							</div>
+									<div id="preview">
+									        <label for="date">Date</label>
+        											<input v-model="date" name="date" class="block col-12 mb1 field" type="text"  id="datedate">
+        											
+        											<h2>{{date}}</h2>
+									</div>
+
 			        </div>
 			        <div id="footer">
 			        <p>Copyright &copy;2019&nbsp;|&nbsp;All Rights Reserved</p>
 			        </div>
 			    </div> 
     </div>
-  
+  <script type="text/javascript">
+  var app = new Vue({
+	  el: '#preview',
+	  data: {
+	    date: ''
+
+	  },
+	  mounted () {
+	    var vm = this
+	    $('#datedate').datepicker({
+	    onSelect: function(dateText) { 
+	      vm.date = dateText
+	    }
+	})
+	  }
+	})
+
+	$(function(){
+	  $("input[name=date]" ).datepicker();
+	});
+
+
+  </script>
 </body>
 </html>
